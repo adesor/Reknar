@@ -7,7 +7,8 @@ Compatible with Python 2.7.X
 To use:
 ```Python
 >>> from reknar import Reknar
->>> reknar = Reknar(graph) # graph can be any URL graph of the form {URL1 : [outlink1, outlink2,...], URL2 : [outlink3,...],...}
+>>> reknar = Reknar(graph) # graph can be any URL graph of the form 
+						   # {URL1 : [outlink1, outlink2,...], URL2 : [outlink3,...],...}
 ```
 
 To use with Redips:
@@ -35,7 +36,7 @@ To access the ranks:
 
 To update the graph of the Reknar object:
 ```Python
->>> reknar.update(graph) # graph is the new graph you want to update the Reknar's graph with
+>>> reknar.update(graph) # graph is the new graph you want to update Reknar's graph with
 ```
 
 To save the state of Reknar:
