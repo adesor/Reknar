@@ -8,7 +8,7 @@ To use:
 ```Python
 >>> from reknar import Reknar
 >>> reknar = Reknar(graph) # graph can be any URL graph of the form 
-						   # {URL1 : [outlink1, outlink2,...], URL2 : [outlink3,...],...}
+						  # {URL1 : [outlink1, outlink2,...], URL2 : [outlink3,...],...}
 ```
 
 To use with Redips:
