@@ -34,9 +34,9 @@ To access the ranks:
 >>> reknar.get_ranks()
 ```
 
-To update the graph of the Reknar object:
+To merge the graph of the Reknar object with another graph:
 ```Python
->>> reknar.update(graph) # graph is the new graph you want to update Reknar's graph with
+>>> reknar.merge_graph(graph)
 ```
 
 To save the state of Reknar:
