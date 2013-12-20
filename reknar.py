@@ -21,10 +21,7 @@ class Reknar:
         self.damping_factor = 0.8
         self.numloops = 10
         self.ranks = {}
-        self.npages = len(self.graph)
         self.pickle = pickle
-        for page in self.graph:
-            self.ranks[page] = 1.0 / self.npages
         self.incoming_graph = {}
         for node in self.graph:
             for page in self.graph[node]:
@@ -32,6 +29,11 @@ class Reknar:
                     self.incoming_graph[page].append(node)
                 else:
                     self.incoming_graph[page] = [node]
+
+        self.npages = len(self.graph)
+
+        for page in self.graph:
+            self.ranks[page] = 1.0 / self.npages
 
     def compute_ranks(self):
         """
@@ -44,7 +46,8 @@ class Reknar:
             for page in self.graph:
                 newrank = (1 - self.damping_factor) / self.npages
                 for node in self.incoming_graph[page]:
-                    newrank = newrank + self.damping_factor * (self.ranks[node] / len(self.graph[node]))
+                    if node in self.ranks:
+                        newrank = newrank + self.damping_factor * (self.ranks[node] / len(self.graph[node]))
                 newranks[page] = newrank
             self.ranks = newranks
 
@@ -68,12 +71,23 @@ class Reknar:
         Redips.graph -> None
         Merge Reknar's graph with the input graph
         """
+
+        # Add pages to the graph
         for page in graph:
             if page not in self.graph:
                 self.graph[page] = graph[page]
             else:
                 self.graph[page].extend(graph[page])
 
+        # Add pages to the incoming_graph
+        for node in graph:
+            for page in graph[node]:
+                if page not in self.incoming_graph:
+                    self.incoming_graph[page] = [node]
+                else:
+                    self.incoming_graph[page].append(node)
+
+        # Update npages
         self.npages = len(self.graph)
 
         # Update ranks
